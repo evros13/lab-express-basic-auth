@@ -1,5 +1,10 @@
 
-<h2>Welcome, pal. This is your profile page ❤️</h2>
-
-<h3>Please check your inbox and verify your email to join us!</h3>
-
+{{#if user}}
+  <h2>Welcome, {{ user.username }}! ❤️</h2>
+  <p>This is your profile page!</p>
+  <button>
+    <a href="/userProfile">Reload the page</a>
+  </button>
+{{else}}
+  <p>Still no logged in user, sorry!</p>
+{{/if}}
