@@ -10,6 +10,10 @@ router.get("/sign-up", (req, res) => {
   res.render("auth/signup");
 });
 
+router.get("/user-profile", (req, res) => {
+  res.render('users/user-profile')
+})
+
 router.post("/sign-up", (req, res, next) => {
     const {username, password} = req.body;
   
@@ -19,12 +23,16 @@ router.post("/sign-up", (req, res, next) => {
       .then((hashedPassword) => {
         return User.create({
           username,
-          email,
           passwordHash: hashedPassword
         });
       })
+      .then((newUser) => {
+        res.redirect("/user-profile")
+      })
       .catch((error) => next(error));
   });
+
+
 
 
 module.exports = router;
