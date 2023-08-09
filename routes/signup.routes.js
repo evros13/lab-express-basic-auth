@@ -14,7 +14,7 @@ router.get("/sign-up", (req, res) => {
 
 
 router.post("/sign-up", (req, res, next) => {
-    const { username, password } = req.body;
+    const {username, password} = req.body;
 
     if (!username || !password) {
         res.render('auth/signup', { errorMessage: 'All fields are mandatory. Please provide your username and password.' });
@@ -30,10 +30,10 @@ router.post("/sign-up", (req, res, next) => {
                 passwordHash: hashedPassword
             })
         })
-        // .then(userFromDB => {
-        //   console.log('Newly created user is: ', userFromDB);
-        //   res.redirect("/user-profile");
-        // })
+        .then(userFromDB => {
+          console.log('Newly created user is: ', userFromDB);
+          res.redirect("/user-profile");
+        })
         .catch(error => {
             if (error instanceof mongoose.Error.ValidationError) {
                 res.status(500).render('auth/signup', { errorMessage: error.message });
@@ -44,8 +44,8 @@ router.post("/sign-up", (req, res, next) => {
 });
 
 router.get("/user-profile", (req, res) => {
-    res.render('users/user-profile')
+    res.render('users/user-profile', {userInSession: req.session.currentUser})
 })
-
-
+  
+ 
 module.exports = router;
