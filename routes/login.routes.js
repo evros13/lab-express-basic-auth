@@ -1,11 +1,9 @@
-const { Router } = require("express");
-const router = new Router();
-const mongoose = require('mongoose');
-
-const bcryptjs = require("bcryptjs");
+const express = require('express');
+const User = require('../models/User.model');
+const router = express.Router();
+const bcryptjs = require('bcryptjs');
 const saltRounds = 10;
-
-const User = require("../models/User.model");
+const mongoose = require('mongoose')
 
 
 
@@ -15,6 +13,7 @@ router.get("/login", (req, res) => {
 
 router.post("/login", (req, res, next) => {
     const {username, password} = req.body;
+    console.log(username, password)
 
     if (username === '' || password === '') {
         res.render('auth/login', {
@@ -33,7 +32,7 @@ router.post("/login", (req, res, next) => {
             }
             else if (bcryptjs.compareSync(password, user.passwordHash)) {
                 req.session.currentUser = user;
-                res.redirect('/userProfile');
+                res.redirect('/user-profile');
             }
             else {
                 res.render('auth/login', { errorMessage: 'User not found and/or incorrect password.' });

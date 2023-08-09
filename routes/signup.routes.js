@@ -1,17 +1,19 @@
-const { Router } = require("express");
-const router = new Router();
-const mongoose = require('mongoose');
-
-const bcryptjs = require("bcryptjs");
+const express = require('express');
+const User = require('../models/User.model');
+const router = express.Router();
+const bcryptjs = require('bcryptjs');
 const saltRounds = 10;
-
-const User = require("../models/User.model");
+const mongoose = require('mongoose')
 
 
 router.get("/sign-up", (req, res) => {
     res.render("auth/signup");
 });
 
+router.get("/user-profile", (req, res) => {
+    console.log(req.session.currentUser);
+    res.render('users/user-profile', {userInSession: req.session.currentUser})
+})
 
 router.post("/sign-up", (req, res, next) => {
     const {username, password} = req.body;
@@ -43,9 +45,7 @@ router.post("/sign-up", (req, res, next) => {
         });
 });
 
-router.get("/user-profile", (req, res) => {
-    res.render('users/user-profile', {userInSession: req.session.currentUser})
-})
+
   
  
 module.exports = router;
