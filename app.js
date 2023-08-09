@@ -28,8 +28,12 @@ app.locals.title = `${capitalized(projectName)}- Generated with Ironlauncher`;
 const index = require('./routes/index');
 app.use('/', index);
 
-const authRouter = require('./routes/auth.routes'); 
-app.use('/', authRouter);
+const signupRoutes = require('./routes/signup.routes'); 
+app.use('/', signupRoutes);
+
+const loginRoutes = require('./routes/login.routes'); 
+app.use('/', loginRoutes);
+
 
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
