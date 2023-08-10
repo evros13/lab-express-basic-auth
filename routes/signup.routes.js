@@ -6,15 +6,20 @@ const saltRounds = 10;
 const mongoose = require('mongoose')
 
 
+// Setting the signup page for the user to create its account
 router.get("/sign-up", (req, res) => {
     res.render("auth/signup");
 });
 
+
+// Setting the profile page for the uesr to access its information (if there is an active session)
 router.get("/user-profile", (req, res) => {
     console.log(req.session.currentUser);
     res.render('users/user-profile', {userInSession: req.session.currentUser})
 })
 
+
+// Setting the requirements for the user to be able to create a valid account to be stored in the DB and re-directing accordingly
 router.post("/sign-up", (req, res, next) => {
     const {username, password} = req.body;
 
@@ -46,6 +51,4 @@ router.post("/sign-up", (req, res, next) => {
 });
 
 
-  
- 
 module.exports = router;
