@@ -1,7 +1,12 @@
 
 {{#if userInSession}}
-<p>Welcome, {{userInSession.username}}!</p>
+<p>Welcome, {{userInSession.username}}🙌</p>
 <p>Let's go play <a href="https://evros13.github.io/project-1-game/">The Office</a>!</p>
+
+    <button>
+        <a href="/user-profile">Reload the page</a>
+    </button>
+
 {{else}}
 <a href="/login">Please log in</a>
 {{/if}}

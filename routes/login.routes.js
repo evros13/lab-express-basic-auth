@@ -31,8 +31,8 @@ router.post("/login", (req, res, next) => {
                 return;
             }
             else if (bcryptjs.compareSync(password, user.passwordHash)) {
-                req.session.currentUser = user;
-                res.redirect('/user-profile');
+                req.session.currentUser = user
+                res.redirect('/user-profile')
             }
             else {
                 res.render('auth/login', { errorMessage: "User not found and/or incorrect passwrord." });
